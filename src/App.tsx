@@ -6,7 +6,8 @@ function App() {
     <>
       <div className="grid p-3">
         <div className="hidden lg:flex lg:row-span-2 mb-3.5">
-          <NavBar/>
+          <NavBar />
+          
         </div>
 
 
