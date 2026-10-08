@@ -19,11 +19,12 @@ export default function ColorModeSwitch() {
             setIsDarkMode(true);
         }
     }
-    return (
+  return (
+    <div className = "flex flex-row">
       <button
         type="button"
         onClick={toggleTheme}
-        className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
+        className={`relative inline-flex h-6 w-11 mr-3 items-center rounded-full transition-colors duration-200 ease-in-out focus:outline-none focus:ring-0 focus:ring-green focus:ring-offset-2 ${
           isDarkMode ? "bg-indigo-600" : "bg-gray-300"
         }`}
         role="switch"
@@ -36,6 +37,8 @@ export default function ColorModeSwitch() {
           }`}
         />
       </button>
-    );
+      <div>Dark Mode</div>
+    </div>
+  );
   };
 
