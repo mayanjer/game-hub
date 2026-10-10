@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import apiClient, { AxiosError } from "./services/api-client";
+
+import GameCard from "../GameCard";
 import useGames from "./hooks/UseGames";
 
 
@@ -11,9 +11,13 @@ export default function GridItems() {
   return (
     <>
       {error && <p>{error}</p>}
-      {games.map((game) => (
-        <li>{game.name}</li>
-      ))}
+      <div className="grid">
+        <div className="columns-3 min-w-0">
+          {games.map((game) => (
+            <GameCard id={game.id} name={ game.name} background_image={ game.background_image} />
+          ))}
+        </div>
+      </div>
     </>
   );
 }
