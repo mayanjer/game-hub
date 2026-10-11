@@ -11,12 +11,12 @@ export default function GridItems() {
   return (
     <>
       {error && <p>{error}</p>}
-      <div className="grid">
-        <div className="columns-3 min-w-0">
+      <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-2">
+       
           {games.map((game) => (
-            <GameCard id={game.id} name={ game.name} background_image={ game.background_image} />
+            <GameCard id={game.id} name={ game.name} background_image={ game.background_image} platforms={game.platforms}/>
           ))}
-        </div>
+        
       </div>
     </>
   );
