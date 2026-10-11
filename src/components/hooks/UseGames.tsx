@@ -18,19 +18,25 @@ export interface Game {
 export function useGames() {
 
      const [games, setGames] = useState<Game[]>([]);
-     const [error, setError] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false)
     useEffect(() => {
          const controller = new AbortController()
-       const fetchGames = async () => {
-         try {
-           const res = await apiClient.get("/games", {signal: controller.signal});
-           setGames(res.data.results);
+      const fetchGames = async () => {
+         
+        try {
+           setIsLoading(true)
+          const res = await apiClient.get("/games", { signal: controller.signal });
+          setIsLoading(false)
+          setGames(res.data.results);
+          
          } catch (error) {
-           setError((error as AxiosError).message);
+          setError((error as AxiosError).message);
+          setIsLoading(false)
          }
            return ()=> controller.abort()
        };
        fetchGames();
      }, []);
-    return {games, error }
+    return {games, error, isLoading }
 }
