@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import apiClient, { AxiosError } from "../services/api-client";
 
-interface Platform {
+export interface Platform {
   id: number;
   slug: string;
   name: string;
