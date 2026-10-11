@@ -1,13 +1,20 @@
 import { useEffect, useState } from "react";
 import apiClient, { AxiosError } from "../services/api-client";
 
-interface Game {
+interface Platform {
   id: number;
+  slug: string;
   name: string;
-  background_image:string
 }
 
-export default function useGames() {
+export interface Game {
+  id: number;
+  name: string;
+  background_image: string;
+  parent_platforms: { platform: Platform }[];
+}
+
+export function useGames() {
 
      const [games, setGames] = useState<Game[]>([]);
      const [error, setError] = useState("");
