@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
-import type { AxiosError, CanceledError } from "axios";
+import type { AxiosError,  } from "axios";
 
 interface Genre {
     id: number;
-    name: string;
+  name: string;
+  image_background: string;
 
 }
 
