@@ -1,9 +1,13 @@
 
+interface Image{
+    width: string;
+    length : string
+}
 
-const cropImage = function (url:string) {
+const cropImage = function (url:string, {width, length}:Image) {
     const target = 'media/'
     const index = url.indexOf(target) + target.length
-    return url.slice(0, index) + "crop/600/400/" + url.slice(index);
+    return url.slice(0, index) + `crop/${width}/${length}/` + url.slice(index);
 
 
 }
