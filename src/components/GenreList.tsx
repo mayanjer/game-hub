@@ -1,15 +1,17 @@
-import { useGenres } from "./hooks/UseGenres";
+import { useGenres, type Genre } from "./hooks/UseGenres";
 import cropImage from "./services/image-url";
 
+interface Props {
+  onSelectedGenre: (genre : Genre)=> void
+}
 
-
-function GenreList() {
+function GenreList({onSelectedGenre}:Props) {
   const { genres } = useGenres();
   return (
     <ul className="flex flex-col gap-4">
       <h2>Genres</h2>
       {genres.map((genre) => (
-        <button type="submit" className="flex gap-2" onClick = {()=>console.log(genre)}>
+        <button type="submit" className="flex gap-2" onClick = {()=>onSelectedGenre(genre)}>
           <img
             src={cropImage(genre.image_background, {
               width: "24",

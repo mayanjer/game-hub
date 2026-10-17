@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import apiClient, { AxiosError } from "../services/api-client";
+import type { SelectedGenreProps } from "../GridItems";
 
 export interface Platform {
   id: number;
@@ -15,7 +16,7 @@ export interface Game {
   metacritic: number;
 }
 
-export function useGames() {
+export function useGames({selectedGenre}:SelectedGenreProps) {
 
      const [games, setGames] = useState<Game[]>([]);
   const [error, setError] = useState("");
@@ -26,7 +27,7 @@ export function useGames() {
          
         try {
            setIsLoading(true)
-          const res = await apiClient.get("/games", { signal: controller.signal });
+          const res = await apiClient.get("/games", { signal: controller.signal, params:{genres:selectedGenre?.id} });
           setIsLoading(false)
           setGames(res.data.results);
           
@@ -37,6 +38,6 @@ export function useGames() {
            return ()=> controller.abort()
        };
        fetchGames();
-     }, []);
+     }, [selectedGenre]);
     return {games, error, isLoading }
 }
