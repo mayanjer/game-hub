@@ -3,6 +3,7 @@ import GenreList from "./components/GenreList";
 import GridItems from "./components/GridItems";
 import NavBar from "./components/NavBar";
 import type { Genre } from "./components/hooks/UseGenres";
+import PlatformList from "./components/PlatformList";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         </div>
         <div className="lg:col-start-2 xl:cols-start-2 lg:col-span-2 xl:col-span-3">
           {" "}
+          <PlatformList/>
           <GridItems selectedGenre={ selectedGenre } />
         </div>
       </div>
