@@ -1,8 +1,8 @@
 import GameCard from "../GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
-import { useGames, type Game } from "./hooks/UseGames";
+import { useGames } from "./hooks/UseGames";
 
-export default function GridItems(filteredGames:Game[]) {
+export default function GridItems() {
   const { error, games, isLoading } = useGames();
 
   const skeletons = [1,2,3,4,5,6,7,8,9]
@@ -16,9 +16,7 @@ export default function GridItems(filteredGames:Game[]) {
         {games.map((game) => (
           <GameCard game={game} />
         ))}
-        {filteredGames && filteredGames.map((filteredGame) => (
-          <GameCard game={filteredGame} />
-        ))}
+        
       </div>
     </>
   );
