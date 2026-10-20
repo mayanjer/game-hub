@@ -16,28 +16,28 @@ export interface Game {
   metacritic: number;
 }
 
-export function useGames({selectedGenre}:SelectedGenreProps) {
-
-     const [games, setGames] = useState<Game[]>([]);
+export function useGames({ selectedGenre, selectedPlatform }: SelectedGenreProps) {
+  const [games, setGames] = useState<Game[]>([]);
   const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false)
-    useEffect(() => {
-         const controller = new AbortController()
-      const fetchGames = async () => {
-         
-        try {
-           setIsLoading(true)
-          const res = await apiClient.get("/games", { signal: controller.signal, params:{genres:selectedGenre?.id} });
-          setIsLoading(false)
-          setGames(res.data.results);
-          
-         } catch (error) {
-          setError((error as AxiosError).message);
-          setIsLoading(false)
-         }
-           return ()=> controller.abort()
-       };
-       fetchGames();
-     }, [selectedGenre]);
-    return {games, error, isLoading }
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    const controller = new AbortController();
+    const fetchGames = async () => {
+      try {
+        setIsLoading(true);
+        const res = await apiClient.get("/games", {
+          signal: controller.signal,
+          params: { genres: selectedGenre?.id },
+        });
+        setIsLoading(false);
+        setGames(res.data.results);
+      } catch (error) {
+        setError((error as AxiosError).message);
+        setIsLoading(false);
+      }
+      return () => controller.abort();
+    };
+    fetchGames();
+  }, [selectedGenre]);
+  return { games, error, isLoading };
 }

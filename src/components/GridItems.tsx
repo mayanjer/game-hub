@@ -4,14 +4,18 @@ import { useGames } from "./hooks/UseGames";
 import type { Genre } from "./hooks/UseGenres";
 
 export interface SelectedGenreProps {
-  selectedGenre : Genre | null
+  selectedGenre: Genre | null;
+  selectedPlatform: string | null;
 }
 
-export default function GridItems({selectedGenre}:SelectedGenreProps) {
-  console.log(selectedGenre)
-  const { error, games, isLoading } = useGames({selectedGenre});
+export default function GridItems({
+  selectedGenre,
+  selectedPlatform,
+}: SelectedGenreProps) {
+  console.log(selectedPlatform);
+  const { error, games, isLoading } = useGames({ selectedGenre, selectedPlatform });
 
-  const skeletons = [1,2,3,4,5,6,7,8,9]
+  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   return (
     <>
@@ -22,7 +26,6 @@ export default function GridItems({selectedGenre}:SelectedGenreProps) {
         {games.map((game) => (
           <GameCard game={game} />
         ))}
-        
       </div>
     </>
   );

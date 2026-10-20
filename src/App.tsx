@@ -4,19 +4,19 @@ import GridItems from "./components/GridItems";
 import NavBar from "./components/NavBar";
 import type { Genre } from "./components/hooks/UseGenres";
 import PlatformList from "./components/PlatformList";
-import type { Platform } from "./components/hooks/UseGames";
 
 
 function App() {
   const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null)
 
+  const [selectedPlatform, setSelectedPlatform] = useState("")
 
   function handleSelectedGenre(genre:Genre) {
     setSelectedGenre(genre)
   }
 
-  function handleSelectedPlatform(platform: Platform) {
-    console.log(platform)
+  function handleSelectedPlatform(platform: string) {
+    setSelectedPlatform(platform)
   }
   
 
@@ -31,9 +31,10 @@ function App() {
         </div>
         <div className="lg:col-start-2 xl:cols-start-2 lg:col-span-2 xl:col-span-3">
           {" "}
-          <PlatformList platform={() => handleSelectedPlatform} />
+          <PlatformList platform={handleSelectedPlatform} />
           <GridItems
             selectedGenre={selectedGenre}
+            selectedPlatform = {selectedPlatform}
           
           />
         </div>
