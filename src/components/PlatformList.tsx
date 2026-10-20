@@ -9,7 +9,7 @@ export default function PlatformList({ platform }: Props) {
       onChange={(e) => platform(e.target.value)}
       className="mb-1 w-70 rounded-lg border"
     >
-      <option>Platforms</option>
+      <option value = "all">Platforms</option>
       {platforms.map((platform) => (
         <option value={platform.id}>{platform.name}</option>
       ))}

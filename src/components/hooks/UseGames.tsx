@@ -16,10 +16,18 @@ export interface Game {
   metacritic: number;
 }
 
-export function useGames({ selectedGenre, selectedPlatform }: SelectedGenreProps) {
+export function useGames({
+  selectedGenre,
+  selectedPlatform,
+  selector
+}: SelectedGenreProps) {
   const [games, setGames] = useState<Game[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  if (selectedPlatform === "all") {
+    selectedPlatform = null
+  }
   useEffect(() => {
     const controller = new AbortController();
     const fetchGames = async () => {
@@ -27,7 +35,7 @@ export function useGames({ selectedGenre, selectedPlatform }: SelectedGenreProps
         setIsLoading(true);
         const res = await apiClient.get("/games", {
           signal: controller.signal,
-          params: { genres: selectedGenre?.id, platforms:selectedPlatform },
+          params: { genres: selectedGenre?.id, platforms: selectedPlatform, ordering:selector },
         });
         setIsLoading(false);
         setGames(res.data.results);
@@ -38,6 +46,6 @@ export function useGames({ selectedGenre, selectedPlatform }: SelectedGenreProps
       return () => controller.abort();
     };
     fetchGames();
-  }, [selectedGenre, selectedPlatform]);
+  }, [selectedGenre, selectedPlatform, selector]);
   return { games, error, isLoading };
 }

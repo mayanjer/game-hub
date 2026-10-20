@@ -4,21 +4,24 @@ import GridItems from "./components/GridItems";
 import NavBar from "./components/NavBar";
 import type { Genre } from "./components/hooks/UseGenres";
 import PlatformList from "./components/PlatformList";
-
+import SortSelector from "./components/SortSelector";
 
 function App() {
-  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null)
+  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
+  const [selectedPlatform, setSelectedPlatform] = useState("");
+  const [selector, setSelector] = useState("")
 
-  const [selectedPlatform, setSelectedPlatform] = useState("")
-
-  function handleSelectedGenre(genre:Genre) {
-    setSelectedGenre(genre)
+  function handleSelectedGenre(genre: Genre) {
+    setSelectedGenre(genre);
   }
 
   function handleSelectedPlatform(platform: string) {
-    setSelectedPlatform(platform)
+    setSelectedPlatform(platform);
   }
-  
+
+  function handleSelectorChnage(value: string) {
+    setSelector(value)
+  }
 
   return (
     <div className="m-2">
@@ -31,11 +34,14 @@ function App() {
         </div>
         <div className="lg:col-start-2 xl:cols-start-2 lg:col-span-2 xl:col-span-3">
           {" "}
-          <PlatformList platform={handleSelectedPlatform} />
+          <div className="flex gap-3">
+            <PlatformList platform={handleSelectedPlatform} />
+            <SortSelector onSelectorChange={handleSelectorChnage} />
+          </div>
           <GridItems
             selectedGenre={selectedGenre}
-            selectedPlatform = {selectedPlatform}
-          
+            selectedPlatform={selectedPlatform}
+            selector = {selector}
           />
         </div>
       </div>

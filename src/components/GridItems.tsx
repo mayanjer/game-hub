@@ -6,14 +6,16 @@ import type { Genre } from "./hooks/UseGenres";
 export interface SelectedGenreProps {
   selectedGenre: Genre | null;
   selectedPlatform: string | null;
+  selector: string
 }
 
 export default function GridItems({
   selectedGenre,
   selectedPlatform,
+  selector
 }: SelectedGenreProps) {
   console.log(selectedPlatform);
-  const { error, games, isLoading } = useGames({ selectedGenre, selectedPlatform });
+  const { error, games, isLoading } = useGames({ selectedGenre, selectedPlatform, selector });
 
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
