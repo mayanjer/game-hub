@@ -27,7 +27,7 @@ export function useGames({ selectedGenre, selectedPlatform }: SelectedGenreProps
         setIsLoading(true);
         const res = await apiClient.get("/games", {
           signal: controller.signal,
-          params: { genres: selectedGenre?.id },
+          params: { genres: selectedGenre?.id, platforms:selectedPlatform },
         });
         setIsLoading(false);
         setGames(res.data.results);
@@ -38,6 +38,6 @@ export function useGames({ selectedGenre, selectedPlatform }: SelectedGenreProps
       return () => controller.abort();
     };
     fetchGames();
-  }, [selectedGenre]);
+  }, [selectedGenre, selectedPlatform]);
   return { games, error, isLoading };
 }

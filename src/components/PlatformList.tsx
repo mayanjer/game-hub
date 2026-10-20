@@ -11,7 +11,7 @@ export default function PlatformList({ platform }: Props) {
     >
       <option>Platforms</option>
       {platforms.map((platform) => (
-        <option value={platform.name}>{platform.name}</option>
+        <option value={platform.id}>{platform.name}</option>
       ))}
     </select>
   );
